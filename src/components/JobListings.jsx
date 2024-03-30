@@ -1,9 +1,13 @@
 import jobs from '../assets/jobs.json';
 import JobListing from "./JobListing.jsx";
 
-const JobListings = () => {
-    console.log("Hello World");
-    console.log(jobs);
+// eslint-disable-next-line react/prop-types
+const JobListings = ({isHome = false}) => {
+
+    let jobsForDisplay = jobs;
+    if (!isHome) {
+        jobsForDisplay = jobs.slice(0, 3);
+    }
 
     return (
         <>
@@ -11,17 +15,15 @@ const JobListings = () => {
             <section className="bg-blue-50 px-4 py-10">
                 <div className="container-xl lg:container m-auto">
                     <h2 className="text-3xl font-bold text-indigo-500 mb-6 text-center">
-                        Browse Jobs
+                        {isHome ? "Browse Jobs" : "Latest Jobs"}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {/* eslint-disable-next-line no-unused-vars */}
-                        {jobs.map((job, index) => (
-                            // eslint-disable-next-line react/jsx-key
-                                <JobListing job={job}  key={job.id} />
-                            )
-                        )
+                        {
+                            jobsForDisplay.map((job) => (
+                                // eslint-disable-next-line react/jsx-key
+                                <JobListing job={job} key={job.id}/>
+                            ))
                         }
-
                     </div>
                 </div>
             </section>
