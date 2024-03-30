@@ -1,8 +1,28 @@
-import jobs from '../assets/jobs.json';
+
 import JobListing from "./JobListing.jsx";
+import {useEffect, useState} from "react";
 
 // eslint-disable-next-line react/prop-types
 const JobListings = ({isHome = false}) => {
+
+    const [jobs, setJobs] = useState([]);
+    // eslint-disable-next-line no-unused-vars
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const response = await fetch("http://localhost:8000/jobs");
+                const data = await response.json();
+                setJobs(data);
+            } catch (error) {
+                console.error("Error fetching jobs", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchJobs();
+    }, []);
 
     let jobsForDisplay = jobs;
     if (!isHome) {

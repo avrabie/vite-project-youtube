@@ -1,14 +1,9 @@
-import './App.css'
-import Navbar from "./components/Navbar.jsx";
-import Hero from "./components/Hero.jsx";
-import HomeCards from "./components/HomeCards.jsx";
-import JobListings from "./components/JobListings.jsx";
-import ViewAllJobs from "./components/ViewAllJobs.jsx";
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import JobsPage from "./pages/JobsPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import './App.css'
 
 
 const App = () => {
