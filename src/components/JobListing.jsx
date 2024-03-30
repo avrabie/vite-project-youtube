@@ -1,7 +1,14 @@
+import React from "react";
 
 const JobListing = (props) => {
     // eslint-disable-next-line react/prop-types
     const {job} = props;
+
+    const [showFullDescription, setShowFullDescription] = React.useState(false);
+    let description = job.description;
+    if (!showFullDescription) {
+        description = description.substring(0, 100) + "...";
+    }
 
 return (
     <div className="bg-white rounded-xl shadow-md relative" >
@@ -12,7 +19,12 @@ return (
             </div>
 
             <div className="mb-5">
-                {job.description}
+                {description}
+                <button
+                    onClick={() => setShowFullDescription((prev) => !prev)}
+                    className="text-indigo-500 hover:underline">
+                    {showFullDescription ? "Show Less" : "Show More"}
+                </button>
             </div>
 
             <h3 className="text-indigo-500 mb-2"> {job.salary} / Year</h3>
