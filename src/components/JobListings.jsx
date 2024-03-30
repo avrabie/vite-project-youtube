@@ -1,4 +1,3 @@
-
 import JobListing from "./JobListing.jsx";
 import {useEffect, useState} from "react";
 
@@ -39,10 +38,13 @@ const JobListings = ({isHome = false}) => {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {
-                            jobsForDisplay.map((job) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <JobListing job={job} key={job.id}/>
-                            ))
+                            loading ? (<h1> Loading... </h1>) :
+                                <>
+                                    {jobsForDisplay.map((job) => (
+                                        <JobListing job={job} key={job.id}/>
+                                    ))}
+                                </>
+
                         }
                     </div>
                 </div>
