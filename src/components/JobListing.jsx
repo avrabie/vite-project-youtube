@@ -1,4 +1,5 @@
 import React from "react";
+import {FaMapMarker} from "react-icons/fa";
 
 const JobListing = (props) => {
     // eslint-disable-next-line react/prop-types
@@ -33,7 +34,8 @@ return (
 
             <div className="flex flex-col lg:flex-row justify-between mb-4">
                 <div className="text-orange-700 mb-3">
-                    <i className="fa-solid fa-location-dot text-lg"></i>
+                    {/*<i className="fa-solid fa-location-dot text-lg"></i>*/}
+                    <FaMapMarker className="inline mr-1 text-lg"></FaMapMarker>
                     {job.location}
                 </div>
                 <a
