@@ -38,6 +38,10 @@ const Navbar = () => {
                                     className={(isActive) => linkClasses(isActive)}
                                 >Add Job</NavLink
                                 >
+                                <NavLink
+                                    to="/about"
+                                    className={(isActive) => linkClasses(isActive)}>
+                                    About</NavLink>
                             </div>
                         </div>
                     </div>

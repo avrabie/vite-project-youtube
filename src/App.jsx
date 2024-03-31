@@ -5,17 +5,38 @@ import JobsPage from "./pages/JobsPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import './App.css'
 import JobPage, {jobLoader} from "./pages/JobPage.jsx";
+import AddJobPage from "./pages/AddJobPage.jsx";
 
 
 const App = () => {
     // const myArr = ["Hello", "World", "Adrian", "Here", "Inna", "There"];
 
+    const addJob = async (job) => {
+        try {
+            const response = await fetch("/api/jobs", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(job),
+            });
+            if (response.ok) {
+                console.log("Job added successfully");
+            } else {
+                alert("Failed to add job");
+            }
+
+        } catch (error) {
+            console.error("Error adding job", error);
+        }
+    }
     var router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<MainLayout/>} >
                 <Route index element={<HomePage/>} />
                 <Route path="jobs" element={<JobsPage/>} />
                 <Route path="job/:id" element={<JobPage/>} loader={jobLoader} />
+                <Route path={"add-job"} element={<AddJobPage addJobSubmit={addJob} />} />
                 <Route path={"*"} element={<NotFound/>} />
 
             </Route>
@@ -25,14 +46,6 @@ const App = () => {
 
     return (
         <RouterProvider router={router} />
-        // <>
-        //     <Navbar/>
-        //     <Hero title='Transcend into a React Developer' subtitle='Some inspirational words go here'></Hero>
-        //     <HomeCards></HomeCards>
-        //     <JobListings></JobListings>
-        //     <ViewAllJobs></ViewAllJobs>
-        // </>
-
     )
 }
 export default App
