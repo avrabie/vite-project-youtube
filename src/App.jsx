@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout.jsx";
 import JobsPage from "./pages/JobsPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import './App.css'
-import JobPage from "./pages/JobPage.jsx";
+import JobPage, {jobLoader} from "./pages/JobPage.jsx";
 
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
             <Route path="/" element={<MainLayout/>} >
                 <Route index element={<HomePage/>} />
                 <Route path="jobs" element={<JobsPage/>} />
-                <Route path="job/:id" element={<JobPage/>} />
+                <Route path="job/:id" element={<JobPage/>} loader={jobLoader} />
                 <Route path={"*"} element={<NotFound/>} />
 
             </Route>
