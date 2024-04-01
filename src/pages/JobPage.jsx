@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import {Link, useLoaderData, useNavigate} from "react-router-dom";
 import {FaArrowLeft, FaLocationDot} from "react-icons/fa6";
+import {toast} from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
 const JobPage = ({deleteMe}) => {
@@ -8,11 +9,17 @@ const JobPage = ({deleteMe}) => {
     const navigate = useNavigate();
 
     const deleteJob = async (id) => {
+        var confirmation = window.confirm("Are you sure you want to delete this job?");
+        if (!confirmation) {
+            return;
+        }
         console.log("Deleting job with id", id);
         var response = await deleteMe(id);
         if (response.ok) {
+            toast.success("Job deleted successfully");
             console.log("Job deleted successfully");
         } else {
+            toast.error("Failed to delete job");
             alert("Failed to delete job");
         }
         console.log("redirecting to /jobs");

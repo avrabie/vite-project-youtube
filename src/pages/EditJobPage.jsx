@@ -1,38 +1,61 @@
+import {useLoaderData, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
 
-// eslint-disable-next-line react/prop-types
-const AddJobPage = ({ addJobSubmit }) => {
 
+const EditJobPage = () => {
+
+
+    const job = useLoaderData();
+    const [type, setType] = useState(job.type)
     // eslint-disable-next-line no-unused-vars
-    const [type, setType] = useState('Full-Time')
+    const [title, setTitle] = useState(job.title)
     // eslint-disable-next-line no-unused-vars
-    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState(job.description)
     // eslint-disable-next-line no-unused-vars
-    const [description, setDescription] = useState('')
+    const [salary, setSalary] = useState(job.salary)
     // eslint-disable-next-line no-unused-vars
-    const [salary, setSalary] = useState('Under $50K')
+    const [location, setLocation] = useState(job.location)
     // eslint-disable-next-line no-unused-vars
-    const [location, setLocation] = useState('')
+    const [company, setCompany] = useState(job.company.name)
     // eslint-disable-next-line no-unused-vars
-    const [company, setCompany] = useState('')
+    const [companyDescription, setCompanyDescription] = useState(job.company.description)
     // eslint-disable-next-line no-unused-vars
-    const [companyDescription, setCompanyDescription] = useState('')
+    const [contactEmail, setContactEmail] = useState(job.company.contactEmail)
     // eslint-disable-next-line no-unused-vars
-    const [contactEmail, setContactEmail] = useState('')
-    // eslint-disable-next-line no-unused-vars
-    const [contactPhone, setContactPhone] = useState('')
+    const [contactPhone, setContactPhone] = useState(job.company.contactPhone)
     // eslint-disable-next-line no-unused-vars
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate();
 
-    function submitForm(e) {
-        console.log('Form Submitted')
+
+    async function updateJob(newJob) {
+        try {
+            const response = await fetch(`/api/jobs/${newJob.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newJob),
+            });
+            if (response.ok) {
+                toast.success("Job update request completed successfully")
+            } else {
+                alert("Failed to add job");
+            }
+
+        } catch (error) {
+            console.error("Error adding job", error);
+        }
+    }
+
+    async function submitForm(e) {
+        console.log('Form To be Submitted')
         e.preventDefault()
-        const job = {
+        const updatedJob = {
+            id: job.id,
             type,
             title,
             description,
@@ -45,12 +68,14 @@ const AddJobPage = ({ addJobSubmit }) => {
                 contactPhone: contactPhone
             }
         }
-        console.log(job)
-        addJobSubmit(job);
-        toast.success('Job added successfully');
+        console.log(updatedJob)
+        // eslint-disable-next-line no-unused-vars
+        var promise = await updateJob(updatedJob);
+        toast.success('Job update request sent, id: '+updatedJob.id)
         navigate('/jobs')
-
     }
+
+
 
     return (
         <>
@@ -60,7 +85,7 @@ const AddJobPage = ({ addJobSubmit }) => {
                         className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
                     >
                         <form onSubmit={submitForm}>
-                            <h2 className="text-3xl text-center font-semibold mb-6">Add Job</h2>
+                            <h2 className="text-3xl text-center font-semibold mb-6">Update Job</h2>
 
                             <div className="mb-4">
                                 <label htmlFor="type" className="block text-gray-700 font-bold mb-2"
@@ -228,7 +253,7 @@ const AddJobPage = ({ addJobSubmit }) => {
                                     className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
                                     type="submit"
                                 >
-                                    Add Job
+                                    Update Job
                                 </button>
                             </div>
                         </form>
@@ -238,4 +263,4 @@ const AddJobPage = ({ addJobSubmit }) => {
         </>
     );
 }
-export default AddJobPage;
+export default EditJobPage;

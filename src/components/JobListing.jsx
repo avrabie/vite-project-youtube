@@ -9,7 +9,8 @@ const JobListing = (props) => {
     const [showFullDescription, setShowFullDescription] = React.useState(false);
     let description = job.description;
     if (!showFullDescription) {
-        description = description.substring(0, 100) + "...";
+        // eslint-disable-next-line react/prop-types
+        description = description.substring(0, 80) + "...";
     }
 
 return (
