@@ -1,9 +1,24 @@
 // eslint-disable-next-line no-unused-vars
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, useLoaderData, useNavigate} from "react-router-dom";
 import {FaArrowLeft, FaLocationDot} from "react-icons/fa6";
 
-const JobPage = () => {
+// eslint-disable-next-line react/prop-types
+const JobPage = ({deleteMe}) => {
     const job = useLoaderData();
+    const navigate = useNavigate();
+
+    const deleteJob = async (id) => {
+        console.log("Deleting job with id", id);
+        var response = await deleteMe(id);
+        if (response.ok) {
+            console.log("Job deleted successfully");
+        } else {
+            alert("Failed to delete job");
+        }
+        console.log("redirecting to /jobs");
+        navigate('/jobs')
+
+    }
 
 
     // const id = useParams().id;
@@ -91,6 +106,7 @@ const JobPage = () => {
                                     >Edit Job</Link
                                     >
                                     <button
+                                        onClick={() => deleteJob(job.id)}
                                         className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                                     >
                                         Delete Job
