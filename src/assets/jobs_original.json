@@ -111,6 +111,20 @@
         "contactEmail": "inna.tiganas@gmail.com",
         "contactPhone": "068132473"
       }
+    },
+    {
+      "id": "989b",
+      "type": "Full-Time",
+      "title": "Test Job 1",
+      "description": "Test job 1 description",
+      "salary": "Under $50K",
+      "location": "Bassersdorf, ZH",
+      "company": {
+        "name": "Umirtro SRL",
+        "description": "Some company in Norther moldova",
+        "contactEmail": "mr.vrabie@gmail.com",
+        "contactPhone": "+373 79128987"
+      }
     }
   ]
 }
