@@ -7,6 +7,7 @@ import './App.css'
 import JobPage, {jobLoader} from "./pages/JobPage.jsx";
 import AddJobPage from "./pages/AddJobPage.jsx";
 import EditJobPage from "./pages/EditJobPage.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
 
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
                 <Route path="job/:id" element={<JobPage deleteMe={deleteJob}/>} loader={jobLoader} />
                 <Route path="job/edit/:id" element={<EditJobPage />} loader={jobLoader} />
                 <Route path={"add-job"} element={<AddJobPage addJobSubmit={addJob} />} />
+                <Route path={"about"} element={<AboutUs />} />
                 <Route path={"*"} element={<NotFound/>} />
 
             </Route>
