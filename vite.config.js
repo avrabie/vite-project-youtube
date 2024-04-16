@@ -10,6 +10,7 @@ export default defineConfig({
         host: true,
         proxy: {
             '/api': {
+                // this needs to be changed to the correct URL
                 target: 'http://iaka-jobs-davide:8080',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
