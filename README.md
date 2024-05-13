@@ -17,6 +17,7 @@ This is the tutorial of the video above:
 [YouTube Traversy Media](https://www.youtube.com/watch?v=LDB4uaJ87e0)
 
 1. Start a vite project from scratch:
+2. Make sure you have node installed and npm
 
     1.2. Install Vite globally
     `npm init vite@latest my-vite-project`
