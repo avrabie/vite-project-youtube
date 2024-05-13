@@ -18,6 +18,7 @@ This is the tutorial of the video above:
 
 1. Start a vite project from scratch:
 2. Make sure you have node installed and npm
+3.  npm install vite
 
     1.2. Install Vite globally
     `npm init vite@latest my-vite-project`
